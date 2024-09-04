@@ -14,6 +14,8 @@
 		444EC0502C870AE2007D5CDD /* sem7projectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC04F2C870AE2007D5CDD /* sem7projectTests.swift */; };
 		444EC05A2C870AE3007D5CDD /* sem7projectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0592C870AE3007D5CDD /* sem7projectUITests.swift */; };
 		444EC05C2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC05B2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift */; };
+		444EC0692C873D15007D5CDD /* Task1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0682C873D14007D5CDD /* Task1View.swift */; };
+		444EC0772C88369F007D5CDD /* Task2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0762C88369F007D5CDD /* Task2View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,9 @@
 		444EC0552C870AE3007D5CDD /* sem7projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sem7projectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		444EC0592C870AE3007D5CDD /* sem7projectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sem7projectUITests.swift; sourceTree = "<group>"; };
 		444EC05B2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sem7projectUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		444EC0682C873D14007D5CDD /* Task1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task1View.swift; sourceTree = "<group>"; };
+		444EC0752C87A0EC007D5CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		444EC0762C88369F007D5CDD /* Task2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +79,12 @@
 		444EC0322C870ADF007D5CDD = {
 			isa = PBXGroup;
 			children = (
+				444EC06A2C879C1A007D5CDD /* Packages */,
 				444EC03D2C870ADF007D5CDD /* sem7project */,
 				444EC04E2C870AE2007D5CDD /* sem7projectTests */,
 				444EC0582C870AE3007D5CDD /* sem7projectUITests */,
 				444EC03C2C870ADF007D5CDD /* Products */,
+				444EC06E2C879E7C007D5CDD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,8 +101,11 @@
 		444EC03D2C870ADF007D5CDD /* sem7project */ = {
 			isa = PBXGroup;
 			children = (
+				444EC0752C87A0EC007D5CDD /* Info.plist */,
 				444EC03E2C870ADF007D5CDD /* sem7projectApp.swift */,
 				444EC0402C870ADF007D5CDD /* ContentView.swift */,
+				444EC0762C88369F007D5CDD /* Task2View.swift */,
+				444EC0682C873D14007D5CDD /* Task1View.swift */,
 				444EC0422C870AE2007D5CDD /* Assets.xcassets */,
 				444EC0442C870AE2007D5CDD /* Preview Content */,
 			);
@@ -127,6 +137,20 @@
 			path = sem7projectUITests;
 			sourceTree = "<group>";
 		};
+		444EC06A2C879C1A007D5CDD /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		444EC06E2C879E7C007D5CDD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +167,8 @@
 			dependencies = (
 			);
 			name = sem7project;
+			packageProductDependencies = (
+			);
 			productName = sem7project;
 			productReference = 444EC03B2C870ADF007D5CDD /* sem7project.app */;
 			productType = "com.apple.product-type.application";
@@ -259,6 +285,8 @@
 			files = (
 				444EC0412C870ADF007D5CDD /* ContentView.swift in Sources */,
 				444EC03F2C870ADF007D5CDD /* sem7projectApp.swift in Sources */,
+				444EC0772C88369F007D5CDD /* Task2View.swift in Sources */,
+				444EC0692C873D15007D5CDD /* Task1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,9 +444,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"sem7project/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "../PopupView sem7project/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sem7project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -444,9 +473,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"sem7project/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "../PopupView sem7project/Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sem7project/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
