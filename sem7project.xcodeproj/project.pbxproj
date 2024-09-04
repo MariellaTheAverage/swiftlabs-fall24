@@ -102,10 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				444EC0752C87A0EC007D5CDD /* Info.plist */,
-				444EC03E2C870ADF007D5CDD /* sem7projectApp.swift */,
-				444EC0402C870ADF007D5CDD /* ContentView.swift */,
-				444EC0762C88369F007D5CDD /* Task2View.swift */,
-				444EC0682C873D14007D5CDD /* Task1View.swift */,
+				444EC07A2C884C45007D5CDD /* main */,
+				444EC07B2C884C66007D5CDD /* Task1 */,
+				444EC07C2C884C75007D5CDD /* Task2 */,
 				444EC0422C870AE2007D5CDD /* Assets.xcassets */,
 				444EC0442C870AE2007D5CDD /* Preview Content */,
 			);
@@ -149,6 +148,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		444EC07A2C884C45007D5CDD /* main */ = {
+			isa = PBXGroup;
+			children = (
+				444EC03E2C870ADF007D5CDD /* sem7projectApp.swift */,
+				444EC0402C870ADF007D5CDD /* ContentView.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		444EC07B2C884C66007D5CDD /* Task1 */ = {
+			isa = PBXGroup;
+			children = (
+				444EC0682C873D14007D5CDD /* Task1View.swift */,
+			);
+			path = Task1;
+			sourceTree = "<group>";
+		};
+		444EC07C2C884C75007D5CDD /* Task2 */ = {
+			isa = PBXGroup;
+			children = (
+				444EC0762C88369F007D5CDD /* Task2View.swift */,
+			);
+			path = Task2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
