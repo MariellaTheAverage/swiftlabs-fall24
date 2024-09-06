@@ -47,7 +47,6 @@
 		444EC0592C870AE3007D5CDD /* sem7projectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sem7projectUITests.swift; sourceTree = "<group>"; };
 		444EC05B2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sem7projectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		444EC0682C873D14007D5CDD /* Task1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task1View.swift; sourceTree = "<group>"; };
-		444EC0752C87A0EC007D5CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		444EC0762C88369F007D5CDD /* Task2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,7 +100,6 @@
 		444EC03D2C870ADF007D5CDD /* sem7project */ = {
 			isa = PBXGroup;
 			children = (
-				444EC0752C87A0EC007D5CDD /* Info.plist */,
 				444EC07A2C884C45007D5CDD /* main */,
 				444EC07B2C884C66007D5CDD /* Task1 */,
 				444EC07C2C884C75007D5CDD /* Task2 */,

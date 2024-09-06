@@ -37,18 +37,47 @@ func HasP1Won(p1: String, p2: String) -> Int {
 
 struct Task2View: View {
     private var gameVariants = ["Scissors", "Paper", "Rock"]
-    @State private var botsPick = "Scissors"
+    @State private var botsPick = ""
     @State private var usersPick: String? = nil
-    @State private var totalUserWins = 0
-    @State private var currentMatch: Int? = nil
+    @State private var totalWins = [0, 0]
+    @State private var statusString = "Game on!"
+    @State private var txtWinner = ""
+    
+    @State private var showSettings = false
+    @State private var winCondition = 3
+    
+    @State private var test = true
     
     var body: some View {
         VStack {
-            Spacer()
+            /*
+            HStack {
+                Spacer()
+                
+                Button {
+                    showSettings = true
+                } label: {
+                    Image(systemName: "gear")
+                        .padding(.trailing, 30.0)
+                        .imageScale(.large)
+                        
+                }
+            }
+             */
             
             Text("Rock, Paper, Scissors, Lizard, Spock!")
                 .font(.title)
+                .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+                .padding(.top)
+            
+            VStack {
+                Text("\(statusString)")
+            }
+            .padding(.top)
+            .frame(width: 300.0, height: 500.0)
+            .background(Color(red: 0.9, green: 0.9, blue: 0.9))
+            .cornerRadius(/*@START_MENU_TOKEN@*/20.0/*@END_MENU_TOKEN@*/)
             
             Spacer()
             
@@ -77,10 +106,37 @@ struct Task2View: View {
                 })
                 .buttonStyle(.bordered)
             }
-            .padding(.top)
-            
-            Spacer()
+            .padding(.bottom)
         }
+        .popover(isPresented: $showSettings) {
+            VStack(alignment: .center, spacing: 10.0) {
+                Text("Game settings")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                Stepper("Winning score: \(winCondition)", value: $winCondition, in: 1...10)
+                    .padding(.horizontal)
+            }
+        }
+        .toolbar {
+            HStack {
+                Spacer()
+                
+                Button {
+                    showSettings = true
+                } label: {
+                    Image(systemName: "gear")
+                        .padding(.trailing, 30.0)
+                        .imageScale(.large)
+                        
+                }
+            }
+        }
+    }
+    
+    func resetGame() {
+        botsPick = ""
+        totalWins = [0, 0]
+        txtWinner = ""
     }
 }
 
