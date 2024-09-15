@@ -22,7 +22,7 @@ struct ContentView: View {
                     Text("Task 2")
                 }
                 NavigationLink {
-                    Task1View()
+                    Task3View()
                 } label: {
                     Text("Task 3")
                 }

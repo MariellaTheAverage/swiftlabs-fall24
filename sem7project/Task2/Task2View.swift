@@ -115,8 +115,8 @@ struct Task2View: View {
             .padding(.all)
         }
         .toolbar {
-            HStack {
-                Spacer()
+            // HStack {
+                // Spacer()
                 
                 Button {
                     showSettings = true
@@ -125,7 +125,7 @@ struct Task2View: View {
                         .padding(.trailing, 20.0)
                         .imageScale(.medium)
                         
-                }
+                // }
             }
         }
     }
@@ -156,7 +156,6 @@ struct Task2View: View {
     }
     
     func HasP1Won(p1: String, p2: String) -> Int {
-        print(p1, p2)
         if (p1 == p2) {
             return 0
         }

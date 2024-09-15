@@ -16,6 +16,10 @@
 		444EC05C2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC05B2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift */; };
 		444EC0692C873D15007D5CDD /* Task1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0682C873D14007D5CDD /* Task1View.swift */; };
 		444EC0772C88369F007D5CDD /* Task2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0762C88369F007D5CDD /* Task2View.swift */; };
+		444EC07F2C8B1F8B007D5CDD /* Task3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC07E2C8B1F8B007D5CDD /* Task3View.swift */; };
+		444EC0812C8B1FA6007D5CDD /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0802C8B1FA6007D5CDD /* XMLParser.swift */; };
+		444EC0832C8EEB0F007D5CDD /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0822C8EEB0F007D5CDD /* CurrencyModel.swift */; };
+		444EC0852C92B0E7007D5CDD /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EC0842C92B0E7007D5CDD /* AsyncButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,10 @@
 		444EC05B2C870AE3007D5CDD /* sem7projectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sem7projectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		444EC0682C873D14007D5CDD /* Task1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task1View.swift; sourceTree = "<group>"; };
 		444EC0762C88369F007D5CDD /* Task2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2View.swift; sourceTree = "<group>"; };
+		444EC07E2C8B1F8B007D5CDD /* Task3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task3View.swift; sourceTree = "<group>"; };
+		444EC0802C8B1FA6007D5CDD /* XMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		444EC0822C8EEB0F007D5CDD /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
+		444EC0842C92B0E7007D5CDD /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +111,9 @@
 				444EC07A2C884C45007D5CDD /* main */,
 				444EC07B2C884C66007D5CDD /* Task1 */,
 				444EC07C2C884C75007D5CDD /* Task2 */,
-				444EC0422C870AE2007D5CDD /* Assets.xcassets */,
+				444EC07D2C8B1F63007D5CDD /* Task3 */,
 				444EC0442C870AE2007D5CDD /* Preview Content */,
+				444EC0422C870AE2007D5CDD /* Assets.xcassets */,
 			);
 			path = sem7project;
 			sourceTree = "<group>";
@@ -171,6 +180,17 @@
 				444EC0762C88369F007D5CDD /* Task2View.swift */,
 			);
 			path = Task2;
+			sourceTree = "<group>";
+		};
+		444EC07D2C8B1F63007D5CDD /* Task3 */ = {
+			isa = PBXGroup;
+			children = (
+				444EC07E2C8B1F8B007D5CDD /* Task3View.swift */,
+				444EC0802C8B1FA6007D5CDD /* XMLParser.swift */,
+				444EC0822C8EEB0F007D5CDD /* CurrencyModel.swift */,
+				444EC0842C92B0E7007D5CDD /* AsyncButton.swift */,
+			);
+			path = Task3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,10 +325,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				444EC0832C8EEB0F007D5CDD /* CurrencyModel.swift in Sources */,
 				444EC0412C870ADF007D5CDD /* ContentView.swift in Sources */,
 				444EC03F2C870ADF007D5CDD /* sem7projectApp.swift in Sources */,
+				444EC0812C8B1FA6007D5CDD /* XMLParser.swift in Sources */,
 				444EC0772C88369F007D5CDD /* Task2View.swift in Sources */,
 				444EC0692C873D15007D5CDD /* Task1View.swift in Sources */,
+				444EC0852C92B0E7007D5CDD /* AsyncButton.swift in Sources */,
+				444EC07F2C8B1F8B007D5CDD /* Task3View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
