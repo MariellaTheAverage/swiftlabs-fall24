@@ -7,18 +7,64 @@
 
 import Foundation
 
-class CurrencyLoader: ObservableObject {
+actor DataGetter {
+    var processedData: [Currency]
+    var sourceURL: URL
+    static let shared = DataGetter(url: URL(string: "https://www.cbr.ru/scripts/XML_daily.asp")!)
+    private init(url: URL) {
+        self.processedData = []
+        self.sourceURL = url
+    }
+    
+    // lots of warnings but it works
+    func LoadData() async throws -> [Currency] {
+        self.processedData = []
+        let task = URLSession.shared.dataTask(with: self.sourceURL) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error ?? "Unknown error")
+                return
+            }
+            let dataString = String(NSString(data: data, encoding: NSWindowsCP1251StringEncoding) ?? "")
+            var rawData = dataString.data(using: String.Encoding(rawValue: NSWindowsCP1251StringEncoding) )!
+            let Parser = XMLParser(data: rawData)
+            let parseDLGT = CurrencyParser(dataArray: self.processedData)
+            Parser.delegate = parseDLGT
+            self.processedData = []
+            Parser.parse()
+            self.processedData = parseDLGT.dataArray
+        }
+        task.resume()
+        return self.processedData
+    }
+}
+
+extension CurrencyLoader {
+    enum State {
+        case loading
+        case loaded
+        case error(Error)
+    }
+}
+
+// @MainActor
+final class CurrencyLoader: ObservableObject {
     @Published var Currencies: [Currency]
     private var rawData: Data
     private var sourceURL: URL
+    @Published var error: Error?
+    @Published var CurTypeFrom: Currency?
+    @Published var CurTypeTo: Currency?
+    private(set) var state: State = .loading
     
     init(Currencies: [Currency]?, sURL: URL) {
         self.Currencies = Currencies ?? []
         self.rawData = Data()
         self.sourceURL = sURL
+        /*
         Task {
             await self.GetData()
         }
+         */
     }
     
     func UpdateData() async -> Void {
@@ -26,6 +72,15 @@ class CurrencyLoader: ObservableObject {
     }
     
     func GetData() async -> Void {
+        state = .loading
+        /*
+        do {
+            self.Currencies = try await DataGetter.shared.LoadData()
+        } catch {
+            self.error = error
+        }
+         */
+        
         let task = URLSession.shared.dataTask(with: self.sourceURL) { data, response, error in
             guard let data = data, error == nil else {
                 print(error ?? "Unknown error")
@@ -41,6 +96,8 @@ class CurrencyLoader: ObservableObject {
             self.Currencies = parseDLGT.dataArray
         }
         task.resume()
+        
+        state = .loaded
     }
 }
     
@@ -64,7 +121,7 @@ class CurrencyParser: NSObject, XMLParserDelegate {
     ) {
         currentElement = elementName
         if (elementName == "Valute") {
-            dataArray.append(Currency(id: self.idx, VID: nil, NumCode: nil, CharCode: nil, Nominal: nil, Name: nil, Value: nil, VunitRate: nil))
+            dataArray.append(Currency(id: self.idx+1, VID: nil, NumCode: nil, CharCode: nil, Nominal: nil, Name: nil, Value: nil, VunitRate: nil))
             self.idx += 1
         }
     }

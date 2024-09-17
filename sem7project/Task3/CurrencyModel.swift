@@ -9,13 +9,14 @@ import Foundation
 
 public struct Currency: Hashable, Identifiable {
     public var id: Int
-    var VID: String
-    var NumCode: Int
-    var CharCode: String
-    var Nominal: Int
-    var Name: String
-    var Value: Float
-    var VunitRate: Float
+    // public var id: any Hashable
+    public var VID: String
+    public var NumCode: Int
+    public var CharCode: String
+    public var Nominal: Int
+    public var Name: String
+    public var Value: Float
+    public var VunitRate: Float
     
     public init(id: Int, VID: String?, NumCode: Int?, CharCode: String?, Nominal: Int?, Name: String?, Value: Float?, VunitRate: Float?) {
         self.id = id
