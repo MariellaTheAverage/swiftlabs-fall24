@@ -27,7 +27,7 @@ struct Task3View: View {
                     .multilineTextAlignment(.center)
                 
                 Spacer()
-                
+                /*
                 Button {
                     print($currentRates.Currencies)
                 } label: {
@@ -38,6 +38,7 @@ struct Task3View: View {
                 } label: {
                     Text("Log conversion")
                 }
+                */
                 
                 VStack {
                     HStack {
@@ -54,6 +55,9 @@ struct Task3View: View {
                         } label: {
                             Text("Whatever")
                         }
+                        .onChange(of: CurTypeFrom, perform: {
+                            cType in ConvertCurrency(amnt: CurAmntFrom)
+                        })
                         
                     }
                     .padding(.horizontal)
@@ -64,7 +68,9 @@ struct Task3View: View {
                     
                     HStack {
                         TextField("?", value: $CurAmntTo, formatter: formatter)
-                            .disabled(true)
+                            .onChange(of: CurAmntTo, perform: {amnt in
+                                if (amnt > 0) {
+                                    ConvertCurrencyBackwards(amnt: amnt)}})
                         
                         Picker(selection: $CurTypeTo) {
                             ForEach(currentRates.Currencies, id: \.self) {currency in
@@ -73,15 +79,27 @@ struct Task3View: View {
                         } label: {
                             Text("Whatever")
                         }
+                        .onChange(of: CurTypeTo, perform: {
+                            cType in ConvertCurrencyBackwards(amnt: CurAmntTo)
+                        })
                         
                     }
                     .padding(.horizontal)
                 }
                 
                 Spacer()
+                
+                AsyncButton {
+                    await currentRates.GetData()
+                } label: {
+                    Text("Reload exchange rates")
+                }
+                .buttonStyle(.borderedProminent)
+
             }
             .toolbar {
                 AsyncButton {
+                    // currentRates.state = .loading
                     await currentRates.GetData()
                 } label: {
                     Image(systemName: "arrow.2.circlepath")
@@ -97,7 +115,9 @@ struct Task3View: View {
             }
         case .loading:
             VStack{
-                
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(2.0, anchor: .center)
             }
             .task {
                 print("Loading rates...")
@@ -117,11 +137,17 @@ struct Task3View: View {
     
     // Here be conversion logic
     func ConvertCurrency(amnt: Float) {
-        var CFrom = CurTypeFrom!
-        var CTo = CurTypeTo!
-        // print("\(CFrom.CharCode) -> \(CTo.CharCode)")
-        var rub = amnt * CFrom.VunitRate
+        let CFrom = CurTypeFrom!
+        let CTo = CurTypeTo!
+        let rub = amnt * CFrom.VunitRate
         CurAmntTo = rub / CTo.VunitRate
+    }
+    
+    func ConvertCurrencyBackwards(amnt: Float) {
+        let CFrom = CurTypeFrom!
+        let CTo = CurTypeTo!
+        let rub = amnt * CTo.VunitRate
+        CurAmntFrom = rub / CFrom.VunitRate
     }
 }
 
