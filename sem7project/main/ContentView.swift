@@ -2,8 +2,7 @@
 //  ContentView.swift
 //  sem7project
 //
-//  Created by Mary Grishchenko on 03.09.2024.
-//
+
 
 import SwiftUI
 
