@@ -13,6 +13,7 @@ struct Task4View: View {
     @State private var cameraOpen = false
     @State private var freshPhoto = false
     @State private var image: UIImage? = nil
+    @State private var photoTrigger = false
     
     private var cols: [GridItem] = [
         GridItem(.flexible()),
@@ -54,13 +55,13 @@ struct Task4View: View {
         .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .sheet(isPresented: $cameraOpen) {
             ZStack {
-                CameraPreview(capturedPhoto: $image, photoTaken: $freshPhoto)
+                CameraPreview(capturedPhoto: $image, photoTrigger: $photoTrigger, photoTaken: $freshPhoto)
                 VStack {
                     Spacer()
                     HStack {
                         Spacer()
                         Button(action: {
-                            (UIApplication.shared.windows.first?.rootViewController as? UIHostingController<Task4View>)?.rootView.takePhoto()
+                            //(UIApplication.shared.windows.first?.rootViewController as? UIHostingController<Task4View>)?.rootView.takePhoto()
                         }) {
                             Circle()
                                 .fill(Color.white)

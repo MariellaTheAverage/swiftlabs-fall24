@@ -55,6 +55,7 @@ struct Task3View: View {
                         } label: {
                             Text("Whatever")
                         }
+                        .padding(.vertical)
                         .onChange(of: CurTypeFrom, perform: {
                             cType in ConvertCurrency(amnt: CurAmntFrom)
                         })
@@ -71,14 +72,17 @@ struct Task3View: View {
                             .onChange(of: CurAmntTo, perform: {amnt in
                                 if (amnt > 0) {
                                     ConvertCurrencyBackwards(amnt: amnt)}})
+                            
                         
                         Picker(selection: $CurTypeTo) {
                             ForEach(currentRates.Currencies, id: \.self) {currency in
                                 Text("\(currency.Name) (\(currency.CharCode))").tag(currency as Currency?)
                             }
+                            
                         } label: {
                             Text("Whatever")
                         }
+                        .padding(.vertical)
                         .onChange(of: CurTypeTo, perform: {
                             cType in ConvertCurrencyBackwards(amnt: CurAmntTo)
                         })
