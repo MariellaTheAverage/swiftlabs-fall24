@@ -2,8 +2,6 @@
 //  Task3View.swift
 //  sem7project
 //
-//  Created by Mary Grishchenko on 06.09.2024.
-//
 
 import SwiftUI
 
@@ -21,24 +19,12 @@ struct Task3View: View {
         switch currentRates.state {
         case .loaded:
             VStack {
-                Text("Currency converter")
+                Text("Конвертер валют")
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                 
                 Spacer()
-                /*
-                Button {
-                    print($currentRates.Currencies)
-                } label: {
-                    Text("Log rates")
-                }
-                Button {
-                    print("\(CurTypeFrom?.CharCode ?? "None") -> \(CurTypeTo?.CharCode ?? "None")")
-                } label: {
-                    Text("Log conversion")
-                }
-                */
                 
                 VStack {
                     HStack {
@@ -46,6 +32,8 @@ struct Task3View: View {
                             .onChange(of: CurAmntFrom, perform: {amnt in
                                 if (amnt > 0) {
                                     ConvertCurrency(amnt: amnt)}})
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
                         
                         Picker(selection: $CurTypeFrom) {
                             ForEach(currentRates.Currencies, id: \.self) {currency in
@@ -53,7 +41,7 @@ struct Task3View: View {
                             }
                             
                         } label: {
-                            Text("Whatever")
+                            Text("label!")
                         }
                         .padding(.vertical)
                         .onChange(of: CurTypeFrom, perform: {
@@ -72,7 +60,8 @@ struct Task3View: View {
                             .onChange(of: CurAmntTo, perform: {amnt in
                                 if (amnt > 0) {
                                     ConvertCurrencyBackwards(amnt: amnt)}})
-                            
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
                         
                         Picker(selection: $CurTypeTo) {
                             ForEach(currentRates.Currencies, id: \.self) {currency in
@@ -80,7 +69,7 @@ struct Task3View: View {
                             }
                             
                         } label: {
-                            Text("Whatever")
+                            Text("label!")
                         }
                         .padding(.vertical)
                         .onChange(of: CurTypeTo, perform: {
@@ -96,7 +85,7 @@ struct Task3View: View {
                 AsyncButton {
                     await currentRates.GetData()
                 } label: {
-                    Text("Reload exchange rates")
+                    Text("Обновить курс валют")
                 }
                 .buttonStyle(.borderedProminent)
 
@@ -124,12 +113,12 @@ struct Task3View: View {
                     .scaleEffect(2.0, anchor: .center)
             }
             .task {
-                print("Loading rates...")
+                print("Загрузка курса...")
                 await currentRates.GetData()
-                print("Rates loaded")
+                print("Готово")
             }
         default:
-            Text("Whatever")
+            Text("def label")
         }
     }
     

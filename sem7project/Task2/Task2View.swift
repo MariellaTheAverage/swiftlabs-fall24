@@ -2,18 +2,16 @@
 //  Task2View.swift
 //  sem7project
 //
-//  Created by Mary Grishchenko on 04.09.2024.
-//
 
 import SwiftUI
 
 struct Task2View: View {
-    private var gameVariants = ["Scissors", "Paper", "Rock"]
+    private var gameVariants = ["✂️", "📜", "🪨"]
     @State private var botsPick = ""
     @State private var usersPick: String? = nil
     @State private var userWins = 0
     @State private var botWins = 0
-    @State private var statusString = "Bot's pick: "
+    @State private var statusString = "Приложение выбрало: "
     @State private var txtWinner = ""
     @State private var isRunning = true
     
@@ -24,22 +22,20 @@ struct Task2View: View {
     
     var body: some View {
         VStack {
-            Text("Rock, Paper, Scissors, Lizard, Spock!")
+            Text("Камень, ножницы, бумага")
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 
             
             VStack {
-                Text("Game on!")
-                    .font(.headline)
                 
                 Spacer()
                 
                 VStack {
-                    Text("Your score: \(userWins)")
+                    Text("Ваш счет: \(userWins)")
                         .padding(.bottom)
-                    Text("Bot's score: \(botWins)")
+                    Text("Счет приложения: \(botWins)")
                 }
                 
                 Spacer()
@@ -61,7 +57,8 @@ struct Task2View: View {
                     usersPick = "Rock"
                     runGame()
                 }, label: {
-                    Text("Rock")
+                    Text("🪨")
+                        .font(.largeTitle)
                 })
                 .buttonStyle(.borderedProminent)
                 .disabled(!isRunning)
@@ -71,7 +68,8 @@ struct Task2View: View {
                     usersPick = "Paper"
                     runGame()
                 }, label: {
-                    Text("Paper")
+                    Text("📜")
+                        .font(.largeTitle)
                 })
                 .buttonStyle(.borderedProminent)
                 .disabled(!isRunning)
@@ -81,7 +79,8 @@ struct Task2View: View {
                     usersPick = "Scissors"
                     runGame()
                 }, label: {
-                    Text("Scissors")
+                    Text("✂️")
+                        .font(.largeTitle)
                 })
                 .buttonStyle(.borderedProminent)
                 .disabled(!isRunning)
@@ -91,23 +90,23 @@ struct Task2View: View {
             Button(action: {
                 resetGame()
             }, label: {
-                Text("Start a new game!")
+                Text("Еще раз!")
             })
             .buttonStyle(.bordered)
             .padding(.bottom)
         }
         .popover(isPresented: $showSettings) {
             VStack(alignment: .center, spacing: 10.0) {
-                Text("Game settings")
+                Text("Настройки")
                     .font(.headline)
                     .fontWeight(.bold)
-                Stepper("Winning score: \(winCondition)", value: $winCondition, in: 1...10)
+                Stepper("Выигрышный счет: \(winCondition)", value: $winCondition, in: 1...10)
                     .padding(.horizontal)
                 Spacer()
                 Button(action: {
                     resetGame()
                 }, label: {
-                    Text("Start a new game!")
+                    Text("Еще раз!")
                 })
                 .buttonStyle(.bordered)
                 .padding(.bottom)
@@ -142,14 +141,14 @@ struct Task2View: View {
         if res == 1 {
             userWins += 1
             if userWins >= winCondition {
-                txtWinner = "You win!"
+                txtWinner = "Вы выиграли!"
                 isRunning = false
             }
         }
         else if res == -1 {
             botWins += 1
             if botWins >= winCondition {
-                txtWinner = "The bot wins!"
+                txtWinner = "Приложение выиграло!"
                 isRunning = false
             }
         }
@@ -161,19 +160,19 @@ struct Task2View: View {
         }
         switch p1 {
         case "Rock":
-            if (p2 == "Scissors") {
+            if (p2 == "✂️") {
                 return 1
             }
             return -1
 
         case "Scissors":
-            if (p2 == "Paper") {
+            if (p2 == "📜") {
                 return 1
             }
             return -1
 
         case "Paper":
-            if (p2 == "Rock") {
+            if (p2 == "🪨") {
                 return 1
             }
             return -1
