@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    // @Binding var task4data: [Photo]
+    // var loader: PhotoLoader
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -27,7 +30,7 @@ struct ContentView: View {
                     Text("Task 3")
                 }
                 NavigationLink {
-                    Task1View()
+                    Task4View()
                 } label: {
                     Text("Task 4")
                 }
@@ -41,6 +44,18 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        /*
+        let loader = PhotoLoader()
+        ContentView(task4data: $loader.Collection, loader: loader)
+            .task {
+                do {
+                    try await loader.LoadPhotoInfo()
+                }
+                catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
+         */
+        Task1View()
     }
 }
