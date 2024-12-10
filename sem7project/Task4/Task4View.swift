@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct Task4View: View {
-    // @Binding var photoData: [Photo]
-    // var loader: PhotoLoader
+    // camera controls
     @State private var cameraOpen = false
     @State private var freshPhoto = false
     @State private var image: UIImage? = nil
+    @State private var photoTrigger = false
+    
+    // data controls
+    @StateObject private var photoLoader = PhotoLoader()
     
     private var cols: [GridItem] = [
         GridItem(.flexible()),
@@ -44,9 +47,18 @@ struct Task4View: View {
                     alignment: .center,
                     spacing: 20
                 ) {
-                    ForEach(0...10, id:\.self) {
+                    ForEach(photoLoader.Collection) { photo in
                         // cell view of photo
-                        index in Color.red
+                        ZStack {
+                            if let image = photo.Image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            else {
+                                Image(systemName: "photo")
+                            }
+                        }
                     }
                 }
             }
@@ -54,13 +66,14 @@ struct Task4View: View {
         .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .sheet(isPresented: $cameraOpen) {
             ZStack {
-                CameraPreview(capturedPhoto: $image, photoTaken: $freshPhoto)
+                CameraPreview(capturedPhoto: $image, photoTrigger: $photoTrigger, photoTaken: $freshPhoto)
                 VStack {
                     Spacer()
                     HStack {
                         Spacer()
                         Button(action: {
-                            (UIApplication.shared.windows.first?.rootViewController as? UIHostingController<Task4View>)?.rootView.takePhoto()
+                            photoTrigger = true
+                            cameraOpen = false
                         }) {
                             Circle()
                                 .fill(Color.white)
@@ -71,6 +84,36 @@ struct Task4View: View {
                 }
             }
         }
+        .sheet(isPresented: $freshPhoto) {
+            ZStack {
+                if let img = image {
+                    Image(uiImage: img)
+                }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button (action: {
+                            SaveNewPhoto(img: image!)
+                            freshPhoto = false
+                        }) {
+                            Text("Save Photo")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        Spacer()
+                    }
+                }
+            }
+        }
+    }
+    
+    func SaveNewPhoto(img: UIImage) {
+        do {
+            let tmp = try tempPhoto()
+            let newPhoto = MetaPhoto(tmplt: tmp, img: img)
+            photoLoader.AppendPhoto(img: img, meta: newPhoto)
+        }
+        catch { print("No Photo Object\n"); return }
     }
 }
 

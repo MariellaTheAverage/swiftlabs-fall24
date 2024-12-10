@@ -95,7 +95,10 @@ struct CameraPreview: UIViewControllerRepresentable {
 
     // Update UIViewController
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        // Handle updates to the view controller if needed
+        if photoTrigger {
+            context.coordinator.takePhoto()
+            photoTrigger = false
+        }
     }
     
     // Cleanup when the view is removed
