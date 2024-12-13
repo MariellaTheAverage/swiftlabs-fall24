@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct PhotoTag: Identifiable, Codable {
+struct PhotoTag: Identifiable, Hashable, Codable {
     var id: Int
     var Name: String
 }
@@ -37,7 +37,7 @@ struct MetaPhoto: Identifiable, Codable {
         }
     }
     
-    init(tmplt: tempPhoto, img: UIImage) {
+    init(tmplt: tempPhoto) {
         self.id = 0
         self.FileURL = tmplt.fileURL
         self.Name = tmplt.Name
