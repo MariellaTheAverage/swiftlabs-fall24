@@ -22,6 +22,11 @@ struct Task4View: View {
     @State private var showingDetails: Bool = false
     @State private var selectedTags: [Bool] = []
     
+    // search controls
+    @State private var srchName = ""
+    @State private var srchDesc = ""
+    @State private var srchTag: Int? = nil
+    
     private var cols: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -29,7 +34,7 @@ struct Task4View: View {
     ]
     
     var body: some View {
-        VStack {
+        NavigationStack {
             HStack{
                 Spacer()
                 Text("Photo gallery")
@@ -46,29 +51,114 @@ struct Task4View: View {
                 }
             }
             .padding(.horizontal)
+            List {
+                TextField("Search by name", text: $srchName)
+                TextField("Search by description", text: $srchDesc)
+                Picker(selection: $srchTag) {
+                    Text("None").tag(Optional<Int>(nil))
+                    ForEach(photoLoader.TagList) { atag in
+                        Text("\(atag.Name)").tag(Optional(atag.id))
+                    }
+                } label: {
+                    Text("Tag")
+                }
+                // .onChange (of: srchTag, perform: {newValue in
+                //     filterAllPhotos()
+                // })
+                HStack {
+                    Button {
+                        photoLoader.filterCollection(srchName: srchName, srchDesc: srchDesc, srchTag: srchTag)
+                    } label: {
+                        Text("Search")
+                    }
+                    .buttonStyle(.borderless)
+                    .padding()
+                    
+                    Button {
+                        srchName = ""
+                        srchDesc = ""
+                        srchTag = nil
+                        photoLoader.resetFiltering()
+                    } label: {
+                        Text("Clear")
+                    }
+                    .buttonStyle(.borderless)
+                    .padding()
+                }
+            }
             ScrollView {
                 LazyVGrid(
                     columns: cols,
                     alignment: .center,
                     spacing: 20
                 ) {
-                    ForEach(photoLoader.Collection) { photo in
-                        // cell view of photo
-                        Button (action: {
-                            handleCameraClosing(photo: photo)
-                        }) {
-                            if let image = photo.Image {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                            }
-                            else {
-                                Image(systemName: "photo")
-                            }
+                    ForEach(photoLoader.FilteredCollection, id: \.self) { id in
+                        Button {
+                            handleCameraClosing(photo: photoLoader.Collection[id])
+                        } label: {
+                            Image(uiImage: (photoLoader.Collection[id].Image ?? UIImage(systemName: "photo"))!)
+                                .resizable()
+                                .scaledToFit()
                         }
+                        /*
+                        Image(uiImage: (photoLoader.Collection[id].Image ?? UIImage(systemName: "photo"))!)
+                            .resizable()
+                            .scaledToFit()
+                            .onTapGesture {
+                                handleCameraClosing(photo: photoLoader.Collection[id])
+                            }
+                            .background(
+                                NavigationLink(
+                                    destination: PhotoDetailView(
+                                        image: $image,
+                                        photo: $selectedMetaPhoto,
+                                        new: $freshPhoto,
+                                        allTags: photoLoader.TagList,
+                                        selectedTags: $selectedTags,
+                                        onSave: {
+                                            updatePhotoMetadata(meta: selectedMetaPhoto!)
+                                            selectedMetaPhoto = nil
+                                            showingDetails = false
+                                        }
+                                    ),
+                                    isActive: Binding(
+                                        get: { showingDetails == true },
+                                        set: { _ in }
+                                    )
+                                ) {
+                                    EmptyView()
+                                }.hidden()
+                            )
+                         */
                     }
                 }
             }
+            /*
+            NavigationLink(
+                destination: PhotoDetailView(
+                    image: $image,
+                    photo: $newMeta,
+                    new: $freshPhoto,
+                    allTags: photoLoader.TagList,
+                    selectedTags: $selectedTags,
+                    onSave: {
+                        if let img = image {
+                            SaveNewPhoto(img: img, meta: newMeta!)
+                        }
+                        image = nil
+                        newTemp = nil
+                        newMeta = nil
+                        freshPhoto = false
+                    }
+                ),
+                isActive: Binding(
+                    get: { freshPhoto == true },
+                    set: { _ in }
+                )
+            ) {
+                EmptyView()
+            }.hidden()
+             */
         }
         .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
         .sheet(isPresented: $cameraOpen) {
